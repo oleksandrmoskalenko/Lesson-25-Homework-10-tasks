@@ -58,19 +58,44 @@ $btn5.addEventListener('click', () => {
 })
 
 //Task 6
-$btn6.addEventListener('click', () => { })
+$btn6.addEventListener('click', () => {
+    let rangeStart = prompt('Set the start of the range', '')
+    let rangeEnd = prompt('Set the end of the range', '')
+    alert(searchPerfectNum(rangeStart, rangeEnd))
+})
 
 //Task 7
-$btn7.addEventListener('click', () => { })
+$btn7.addEventListener('click', () => {
+    let hoursNum = prompt('Write the number of hours', '')
+    let minutesNum = prompt('Write the number of minutes', '')
+    let secondsNum = prompt('Write the number of seconds', '')
+    showTime(hoursNum, minutesNum, secondsNum)
+})
 
 //Task 8
-$btn8.addEventListener('click', () => { })
+$btn8.addEventListener('click', () => {
+    let hoursNum = prompt('Write the number of hours', '')
+    let minutesNum = prompt('Write the number of minutes', '')
+    let secondsNum = prompt('Write the number of seconds', '')
+    alert(`The number of seconds is ${toSeconds(hoursNum, minutesNum, secondsNum)}`)
+})
 
 //Task 9
-$btn9.addEventListener('click', () => { })
+$btn9.addEventListener('click', () => {
+    let secondsNum = prompt('Write the number of seconds', '')
+    fromSeconds(secondsNum)
+})
 
 //Task 10
-$btn10.addEventListener('click', () => { })
+$btn10.addEventListener('click', () => {
+    let hoursNum1 = prompt('Write the number of hours for the 1st date', '')
+    let minutesNum1 = prompt('Write the number of minutes for the 1st date', '')
+    let secondsNum1 = prompt('Write the number of seconds for the 1st date', '')
+    let hoursNum2 = prompt('Write the number of hours for the 2nd date', '')
+    let minutesNum2 = prompt('Write the number of minutes for the 2nd date', '')
+    let secondsNum2 = prompt('Write the number of seconds for the 2nd date', '')
+    alert(`The result is ${fromSeconds(toSeconds(hoursNum1, minutesNum1, secondsNum1) - toSeconds(hoursNum2, minutesNum2, secondsNum2))}`)
+})
 
 function factorial(n) {
     if (n == 0) return 1
@@ -99,4 +124,31 @@ function perfectNum(number) {
         if (!(number % i)) divisors += i
     if (number == divisors) return "The number is perfect"
     return "The number is not perfect"
+}
+
+function searchPerfectNum(a, b) {
+    let perfects = "The perfect numbers are "
+    for (let i = a; i <= b; i++)
+        if (perfectNum(i) == "The number is perfect") perfects += i + ", "
+    if (perfects === "The perfect numbers are ") return "There are no perfect numbers in this range"
+    else return perfects
+}
+
+function showTime(h, m, s) {
+    if (h < 10) h = "0" + h
+    if (m < 10) m = "0" + m
+    if (s < 10) s = "0" + s
+    return alert(`The result is ${h}:${m}:${s}`)
+}
+
+function toSeconds(h, m, s) {
+    return h * 3600 + m * 60 + s * 1
+}
+
+function fromSeconds(s) {
+    let h = (s - s % 3600) / 3600,
+        m = s - h * 3600
+    m = (m - m % 60) / 60
+    s = s - h * 3600 - m * 60
+    showTime(h, m, s)
 }
